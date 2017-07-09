@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { Subscription, Observable } from 'rxjs';
+
+import { ArticlesService } from '../../shared/services';
 
 @Component({
   selector: 'app-article-tree',
@@ -7,9 +10,11 @@ import { Http } from '@angular/http';
   styleUrls: ['./article-tree.component.scss']
 })
 export class ArticleTreeComponent implements OnInit {
+  articles$: Observable<any>;
 
-  constructor() { }
+  constructor(private articlesService: ArticlesService) { }
 
-  ngOnInit() { }
-
+  ngOnInit(): void {
+    this.articles$ = this.articlesService.getArticlesTree();
+  }
 }

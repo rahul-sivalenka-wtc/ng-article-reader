@@ -1,7 +1,5 @@
 import { AppComponent } from './app.component';
-import { ArticleTreeComponent } from '../components/article-tree/article-tree.component';
-import { NavbarComponent } from '../components/navbar/navbar.component';
-import { SidenavComponent } from '../components/sidenav/sidenav.component';
+import * as components from 'components/components';
 
 export var bootstrap = [
   AppComponent
@@ -9,7 +7,9 @@ export var bootstrap = [
 
 export default [
   AppComponent,
-  ArticleTreeComponent,
-  NavbarComponent,
-  SidenavComponent
+  components.ArticleTreeComponent,
+  components.NavbarComponent,
+  components.SidenavComponent,
+  components.AdminPanelComponent,
+  components.ContentTabPanelComponent
 ];

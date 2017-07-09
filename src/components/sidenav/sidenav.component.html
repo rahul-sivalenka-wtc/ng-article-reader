@@ -1,4 +1,9 @@
 <md-sidenav-container>
-  <md-sidenav opened="true" mode="side" class="layout-sidenav">Side Nav</md-sidenav>
-  <div class="layout-content">Content</div>
+  <md-sidenav opened="true" mode="side" class="layout-sidenav flex-box">
+    <app-article-tree class="flex-box-item top-section"></app-article-tree>
+    <app-admin-panel class="flex-box-item bottom-section"></app-admin-panel>
+  </md-sidenav>
+  <div class="layout-content">
+    <router-outlet></router-outlet>
+  </div>
 </md-sidenav-container>

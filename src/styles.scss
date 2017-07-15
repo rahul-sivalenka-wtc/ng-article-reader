@@ -37,14 +37,14 @@ html, body {
   width: 18em;
 }
 
-app-article-tree p-tree .ui-tree {
+ar-article-tree p-tree .ui-tree {
   height: 100%;
   &.ui-widget-content {
     border: none;
   }
 }
 
-app-root {
+ar-root {
   flex-direction: column;
   position: absolute;
   top: 0;
@@ -55,7 +55,7 @@ app-root {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
 
-  app-sidenav {
+  ar-sidenav {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
@@ -71,7 +71,7 @@ app-root {
   }
 }
 
-app-navbar {
+ar-navbar {
   z-index: 10;
   position: relative;
 }

@@ -1,11 +1,11 @@
-<!--<nav md-tab-nav-bar>
+<nav md-tab-nav-bar>
   <a md-tab-link
-     *ngFor="let link of navLinks"
-     [routerLink]="link"
+     *ngFor="let nav of navLinks"
+     [routerLink]="nav.id"
      routerLinkActive #rla="routerLinkActive"
      [active]="rla.isActive">
-    {{tabLink.label}}
+    {{nav.label}}
   </a>
 </nav>
 
-<router-outlet></router-outlet>-->
+<router-outlet></router-outlet> 

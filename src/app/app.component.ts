@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
 @Component({
-  selector: 'app-root',
+  selector: 'ar-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

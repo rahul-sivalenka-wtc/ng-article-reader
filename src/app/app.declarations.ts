@@ -11,5 +11,7 @@ export default [
   components.NavbarComponent,
   components.SidenavComponent,
   components.AdminPanelComponent,
-  components.ContentTabPanelComponent
+  components.ContentTabPanelComponent,
+  components.ContentDefaultComponent,
+  components.ContentTabComponent
 ];

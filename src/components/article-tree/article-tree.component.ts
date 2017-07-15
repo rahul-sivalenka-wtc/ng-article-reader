@@ -5,7 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { ArticlesService } from '../../shared/services';
 
 @Component({
-  selector: 'app-article-tree',
+  selector: 'ar-article-tree',
   templateUrl: './article-tree.component.html',
   styleUrls: ['./article-tree.component.scss']
 })

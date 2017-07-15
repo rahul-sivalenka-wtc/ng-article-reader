@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { MdSidenavModule, MdToolbarModule } from '@angular/material';
+import { MdSidenavModule, MdToolbarModule, MdTabsModule } from '@angular/material';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from '../db/in-memory-data.service';
@@ -21,6 +21,7 @@ export default [
 
   MdSidenavModule,
   MdToolbarModule,
+  MdTabsModule,
   
   RouterModule.forRoot(routes),
   InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 })

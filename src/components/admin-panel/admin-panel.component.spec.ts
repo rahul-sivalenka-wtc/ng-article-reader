@@ -1,14 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MdToolbarModule } from '@angular/material';
+
 import { AdminPanelComponent } from './admin-panel.component';
 
-describe('AdminPanelComponent', () => {
+fdescribe('AdminPanelComponent', () => {
   let component: AdminPanelComponent;
   let fixture: ComponentFixture<AdminPanelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminPanelComponent ]
+      declarations: [ AdminPanelComponent ],
+      imports: [ MdToolbarModule ]
     })
     .compileComponents();
   }));
@@ -21,5 +24,10 @@ describe('AdminPanelComponent', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show stats link', () => {
+    let ele = fixture.nativeElement as HTMLElement;
+    expect(ele.querySelector('a').innerHTML).toContain('Stats');
   });
 });

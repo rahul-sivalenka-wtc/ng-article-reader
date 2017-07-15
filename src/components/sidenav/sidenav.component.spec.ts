@@ -6,7 +6,7 @@ import { MdSidenavModule } from '@angular/material';
 import { SidenavComponent } from './sidenav.component';
 import { MockComponent } from '../../shared/mocks/mock.component';
 
-fdescribe('SidenavComponent', () => {
+describe('SidenavComponent', () => {
   let component: SidenavComponent;
   let fixture: ComponentFixture<SidenavComponent>;
 

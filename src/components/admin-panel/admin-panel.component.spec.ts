@@ -4,7 +4,7 @@ import { MdToolbarModule } from '@angular/material';
 
 import { AdminPanelComponent } from './admin-panel.component';
 
-fdescribe('AdminPanelComponent', () => {
+describe('AdminPanelComponent', () => {
   let component: AdminPanelComponent;
   let fixture: ComponentFixture<AdminPanelComponent>;
 

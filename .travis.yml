@@ -22,6 +22,5 @@ before_script:
   - npm install -g @angular/cli
   - npm install -g karma
   - yarn
-  - ng build
 
-script: npm test
+script: ng test --watch false

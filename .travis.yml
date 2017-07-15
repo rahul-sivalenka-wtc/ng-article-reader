@@ -19,7 +19,7 @@ before_install:
 
 before_script:
   - npm install -g yarn
-  - npm -g @angular/cli
+  - npm install -g @angular/cli
   - npm install -g karma
   - yarn
   - ng build

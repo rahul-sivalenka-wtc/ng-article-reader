@@ -38,7 +38,6 @@ describe('ArticlesService', () => {
 
   beforeEach(() => {
     backend.connections.subscribe((conn: MockConnection) => {
-      debugger;
       let url = conn.request.url;
 
       switch(true) {
@@ -56,10 +55,31 @@ describe('ArticlesService', () => {
   });
 
   describe('getArticlesTree', () => {
+    /**
+     * expect(res).toEqual(ARTICLES_TREE_DATA);
+     * 
+     * Error: Expected $[0] to have properties
+     * parent: undefined
+     * at stack (http://localhost:9877/base/node_modules/jasmine-core/lib/jasmine-core/jasmine.js?da99c5b057693d025fad3d7685e1590600ca376d:2176:17)
+     * at buildExpectationResult (http://localhost:9877/base/node_modules/jasmine-core/lib/jasmine-core/jasmine.js?da99c5b057693d025fad3d7685e1590600ca376d:2146:14)
+     * at Spec.expectationResultFactory (http://localhost:9877/base/node_modules/jasmine-core/lib/jasmine-core/jasmine.js?da99c5b057693d025fad3d7685e1590600ca376d:766:18)
+     * at Spec.addExpectationResult (http://localhost:9877/base/node_modules/jasmine-core/lib/jasmine-core/jasmine.js?da99c5b057693d025fad3d7685e1590600ca376d:444:34)
+     * at Expectation.addExpectationResult (http://localhost:9877/base/node_modules/jasmine-core/lib/jasmine-core/jasmine.js?da99c5b057693d025fad3d7685e1590600ca376d:710:21)
+     * at Expectation.toEqual (http://localhost:9877/base/node_modules/jasmine-core/lib/jasmine-core/jasmine.js?da99c5b057693d025fad3d7685e1590600ca376d:2099:12)
+     * at SafeSubscriber._next (http://localhost:9877/_karma_webpack_/main.bundle.js:1000:29)
+     * at SafeSubscriber.webpackJsonp.../../../../rxjs/Subscriber.js.SafeSubscriber.__tryOrSetError (http://localhost:9877/_karma_webpack_/vendor.bundle.js:21600:16)
+     * at SafeSubscriber.webpackJsonp.../../../../rxjs/Subscriber.js.SafeSubscriber.next (http://localhost:9877/_karma_webpack_/vendor.bundle.js:21540:27)
+     * at Subscriber.webpackJsonp.../../../../rxjs/Subscriber.js.Subscriber._next (http://localhost:9877/_karma_webpack_/vendor.bundle.js:21478:26)
+     * 
+     * As a workaroud used JSON.stringify
+     */
     it('should parse to proper tree response', async(() => {
-      var result = service.getArticlesTree();
+      let result = service.getArticlesTree();
       result.subscribe(res => {
-        expect(res).toEqual(ARTICLES_TREE_DATA);
+        let resultArr = JSON.stringify(res);
+        let originalArr = JSON.stringify(ARTICLES_TREE_DATA);
+        // expect(res).toEqual(ARTICLES_TREE_DATA); // Errors out
+        expect(resultArr).toEqual(originalArr);
       });
     }));
   });

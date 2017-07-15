@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MdSidenavModule } from '@angular/material';
 
 import { SidenavComponent } from './sidenav.component';
-import { MockComponent } from '../../shared/mocks/mock.component';
+import { MockComponent } from 'shared/mocks';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;

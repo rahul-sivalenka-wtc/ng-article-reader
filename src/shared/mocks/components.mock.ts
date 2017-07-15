@@ -1,12 +1,11 @@
+import { Component } from '@angular/core';
+
 /**
  * Reference: https://medium.com/@cnunciato/a-simple-mock-component-for-angular-2-d79bd58a7b31
  * 
  * Modified By:
  * Phani Rahul Sivalenka
  */
-
-import { Component } from '@angular/core';
-
 export function MockComponent(options: Component): any {
   let metadata: Component = {
     selector: options.selector,

@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import { MockComponent } from 'shared/mocks/mock.component';
+import { MockComponent } from 'shared/mocks';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

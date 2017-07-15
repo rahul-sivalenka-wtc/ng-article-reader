@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TreeModule } from 'primeng/primeng';
+
 import { ArticleTreeComponent } from './article-tree.component';
+import { MockArticlesService } from 'shared/mocks';
+import { ArticlesService } from 'shared/services';
 
 describe('ArticleTreeComponent', () => {
   let component: ArticleTreeComponent;
@@ -8,7 +12,9 @@ describe('ArticleTreeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArticleTreeComponent ]
+      declarations: [ ArticleTreeComponent ],
+      providers: [ { provide: ArticlesService, useClass: MockArticlesService } ],
+      imports: [ TreeModule ]
     })
     .compileComponents();
   }));

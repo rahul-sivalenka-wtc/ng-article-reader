@@ -29,7 +29,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-# References
+## References
 
 * [Angular Material Get Started](https://material.angular.io/guide/getting-started)
 * [PrimeNg Get Started](https://www.primefaces.org/primeng/#/setup)

@@ -31,4 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # References
 
+* [Angular Material Get Started](https://material.angular.io/guide/getting-started)
+* [PrimeNg Get Started](https://www.primefaces.org/primeng/#/setup)
 * [Angular 2 with Travis CI](https://medium.com/from-the-couch/angular-2-with-travis-ci-922040e01937)

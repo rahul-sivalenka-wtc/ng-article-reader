@@ -1,13 +1,14 @@
 let articlesTree = [{
-  "title": "All Articals",
+  "title": "All Articles",
   "id": 1,
+  "expanded": true,
   "categories": [
     {
       "id": 481,
       "slug": "adempiere",
       "title": "ADempiere",
       "description": "",
-      "parent": 0,
+      "parent": 1,
       "post_count": 58,
       "categories": [
         {

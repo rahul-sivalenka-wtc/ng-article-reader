@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~font-awesome/css/font-awesome.min.css";
+@import "~bootstrap/scss/bootstrap.scss";
 
 // PrimeNg styles
 @import "~primeng/resources/themes/omega/theme.css";
@@ -78,4 +79,19 @@ ar-navbar {
 
 .flex-spacer {
   flex: 1 1 auto;
+}
+
+.page-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* Font sizes */
+.text-1-5 {
+  font-size: 1.5em;
 }

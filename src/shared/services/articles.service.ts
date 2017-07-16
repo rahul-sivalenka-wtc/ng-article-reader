@@ -12,7 +12,7 @@ export class ArticlesService extends BaseService {
 
   private folderIcon = 'fa-folder';
   private folderOpenIcon = 'fa-folder-open';
-  private fileIcon = 'fa-text-o';
+  private fileIcon = 'fa-file-o';
 
   articleIds: number[] = [];
   articlesTreeData$: BehaviorSubject<Article[]>;
@@ -45,7 +45,8 @@ export class ArticlesService extends BaseService {
         .get(`${this.baseUrl}/articlesTree`)
         .map(res => res.json().data)
         .subscribe((res) => {
-          let processedData = this._processData(res);
+          let newObj = JSON.parse(JSON.stringify(res));
+          let processedData = this._processData(newObj);
           this.articlesTreeData$.next(processedData);
         });
   }
@@ -67,13 +68,17 @@ export class ArticlesService extends BaseService {
   }
 
   private makeArticle(data): Article {
-    let label = data['title'];
-    data['label'] = label;
+    data['label'] = data['title'];
+    delete data['title'];
+    data['leaf'] = data['leaf'] === 'true';
     if(data.leaf) {
       data['icon'] = this.fileIcon;
       let id = data['post_id'];
       data['id'] = id;
+      delete data['post_id'];
     } else {
+      data['children'] = data['categories'];
+      delete data['categories'];
       data['collapsedIcon'] = this.folderIcon;
       data['expandedIcon'] = this.folderOpenIcon;
     }

@@ -11,7 +11,7 @@ import { ARTICLES_TREE_DATA, Helper } from "shared/mocks";
 describe('ArticlesService', () => {
   let backend: MockBackend;
   let service: ArticlesService;
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -22,10 +22,10 @@ describe('ArticlesService', () => {
         {
           provide: Http,
           useFactory: (backend, options) => new Http(backend, options),
-          deps: [ MockBackend, BaseRequestOptions ]
+          deps: [MockBackend, BaseRequestOptions]
         }
       ],
-      imports: [ HttpModule ]
+      imports: [HttpModule]
     });
   });
 
@@ -38,7 +38,7 @@ describe('ArticlesService', () => {
     backend.connections.subscribe((conn: MockConnection) => {
       let url = conn.request.url;
 
-      switch(true) {
+      switch (true) {
         case (url.indexOf('articlesTree') > 0):
           conn.mockRespond(Helper.getMockResponse({ data: ARTICLES_TREE_DATA }))
           break;
@@ -83,7 +83,7 @@ describe('ArticlesService', () => {
         expect(res.length).toBe(ARTICLES_TREE_DATA.length);
       });
     }));
-    
+
     it('should collect the ids from the result', async(() => {
       let obs = service.getArticles();
       obs.subscribe(data => {
@@ -94,112 +94,125 @@ describe('ArticlesService', () => {
   });
 
   describe('_processData', () => {
-    let testData: { [key:string]:any }[] = [{
-      title: 'Root 1',
-      id: 1
-    }, {
-      title: 'File 3',
-      post_id: 53,
-      leaf: 'true'
-    }, {
-      title: 'Root 2',
-      id: 2,
-      children: [{
-        title: 'File 1',
-        leaf: 'true',
-        post_id: 51
-      }, {
-        title: 'Folder 1',
-        id: 551,
-        children: [{
-          title: 'File 2',
-          post_id: 52,
-          leaf: 'true'
-        }]
-      }]
-    }, {
-      title: 'Root 3',
-      id: 3,
-      children: [{
-        title: 'File 1',
-        leaf: 'true',
-        post_id: 53
-      }]
-    }];
+    let testData: { [key: string]: any }[];
+    let testDataDuplicate;
 
     let collapsedIcon = 'fa-folder';
     let expandedIcon = 'fa-folder-open';
-    let fileIcon = 'fa-text-o';
+    let fileIcon = 'fa-file-o';
 
     let expectFile = (mod, original) => {
-      expect(mod.label).toBeDefined();
-      expect(mod.label).toEqual(original.title);
-      expect(mod.id).toBeDefined();
-      expect(mod.id).toEqual(original.post_id);
-      expect(mod.icon).toEqual(fileIcon);
-      expect(mod.selectable).toBeTruthy();
+      expect(mod.label).toBeDefined('File should have label');
+      expect(mod.label).toEqual(original.title, 'File label should be equal to Original title');
+      expect(mod.id).toBeDefined('File should have id');
+      expect(mod.id).toEqual(original.post_id, 'File id should be equal to original post_id');
+      expect(mod.icon).toEqual(fileIcon, 'File should have icon');
+      expect(mod.selectable).toBeTruthy('File should be selectable');
     };
 
     let expectFolder = (mod, original) => {
-      expect(mod.label).toBeDefined();
-      expect(mod.label).toEqual(original.title);
-      expect(mod.id).toEqual(original.id);
-      expect(mod.collapsedIcon).toEqual(collapsedIcon);
-      expect(mod.expandedIcon).toEqual(expandedIcon);
-      expect(mod.selectable).toBeTruthy();
+      expect(mod.label).toBeDefined('Folder should have label');
+      expect(mod.label).toEqual(original.title, 'Folder label should be equal to Original title');
+      expect(mod.id).toEqual(original.id, 'Folder id should be equal to original id');
+      expect(mod.collapsedIcon).toEqual(collapsedIcon, 'Folder should have collapseIcon');
+      expect(mod.expandedIcon).toEqual(expandedIcon, 'Folder should have expandedIcon ');
+      expect(mod.selectable).toBeTruthy('Folder should be selectable');
+      if (original.categories)
+        expect(mod.children.length).toEqual(original.categories.length, `Folder's should have equal number of children from original categories`);
     };
-    
+
+    beforeEach(() => {
+      testData = [{
+        title: 'Root 1',
+        id: 1
+      }, {
+        title: 'File 3',
+        post_id: 53,
+        leaf: 'true'
+      }, {
+        title: 'Root 2',
+        id: 2,
+        categories: [{
+          title: 'File 1',
+          leaf: 'true',
+          post_id: 51
+        }, {
+          title: 'Folder 1',
+          id: 551,
+          categories: [{
+            title: 'File 2',
+            post_id: 52,
+            leaf: 'true'
+          }]
+        }]
+      }, {
+        title: 'Root 3',
+        id: 3,
+        categories: [{
+          title: 'File 1',
+          leaf: 'true',
+          post_id: 53
+        }]
+      }];
+
+      testDataDuplicate = JSON.parse(JSON.stringify(testData));
+    });
+
     it('should accept an object', () => {
-      let o = testData[0];
+      let o = testDataDuplicate[0];
       let result = service._processData(o);
       expect(result).toBeDefined();
       expect(Array.isArray(result)).toBeTruthy();
     });
 
     it('should accept an array', () => {
-      let o = [testData[0]];
+      let o = [testDataDuplicate[0]];
       let result = service._processData(o);
       expect(result).toBeDefined();
       expect(Array.isArray(result)).toBeTruthy();
     });
 
     it('should covert a non-leaf into a Folder', () => {
-      let onlyOneFolder = testData[0];
+      let onlyOneFolder = testDataDuplicate[0];
+      let onlyOneFolderOriginal = testData[0];
       let result = service._processData(onlyOneFolder);
       expect(Array.isArray(result)).toBeTruthy();
       let o = result[0];
-      expectFolder(o, onlyOneFolder);
+      expectFolder(o, onlyOneFolderOriginal);
     });
 
     it('should convert a leaf into a File', () => {
-      let onlyOneFile = testData[1];
+      let onlyOneFile = testDataDuplicate[1];
+      let onlyOneFileOriginal = testData[1];
       let result = service._processData(onlyOneFile);
       expect(Array.isArray(result)).toBeTruthy();
       let o = result[0];
-      expectFile(o, onlyOneFile);
+      expectFile(o, onlyOneFileOriginal);
     });
 
     it('should convert a non-leaf with children', () => {
-      let nonLeaf = testData[3];
+      let nonLeaf = testDataDuplicate[3];
+      let nonLeafOriginal = testData[3];
       let result = service._processData(nonLeaf);
-      expect(Array.isArray(result)).toBeTruthy();      
+      expect(Array.isArray(result)).toBeTruthy();
       let o = result[0];
-      expectFolder(o, nonLeaf);
+      expectFolder(o, nonLeafOriginal);
       let child = o.children[0];
-      let originalChild = nonLeaf.children[0];  
+      let originalChild = nonLeafOriginal.categories[0];
       expectFile(child, originalChild);
     });
 
     it('should convert a complex object', () => {
-      let data = testData[2];
+      let data = testDataDuplicate[2];
+      let originalData = testData[2];
       let result = service._processData(data);
       expect(result).toBeDefined();
       expect(Array.isArray(result)).toBeTruthy();
       let o = result[0];
-      expectFolder(o, data);
-      expectFolder(o.children[1], data.children[1]);
-      expectFile(o.children[0], data.children[0]);
-      expectFile(o.children[1].children[0], data.children[1].children[0]);
+      expectFolder(o, originalData);
+      expectFolder(o.children[1], originalData.categories[1]);
+      expectFile(o.children[0], originalData.categories[0]);
+      expectFile(o.children[1].children[0], originalData.categories[1].categories[0]);
     });
   });
 });

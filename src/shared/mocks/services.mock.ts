@@ -17,7 +17,7 @@ export let ARTICLES_TREE_DATA: TreeNode[] = [{
  * Mock Services
  */
 export class MockArticlesService {
-  getArticlesTree(): Observable<any> {
+  getArticles(): Observable<any> {
     return Observable.of(ARTICLES_TREE_DATA);
   }
 }

@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { TabsGuard } from 'shared/guards/tabs-guard.service';
 import * as components from '../components/components';
 
 let routes: Route[] = [{
@@ -8,6 +9,7 @@ let routes: Route[] = [{
 }, {
   path: 'article',
   component: components.ContentTabPanelComponent,
+  canActivate: [ TabsGuard ],
   children: [{
     path: '',
     pathMatch: 'full',

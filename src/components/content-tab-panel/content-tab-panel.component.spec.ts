@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MdTabsModule } from '@angular/material';
 
 import { ContentTabPanelComponent } from './content-tab-panel.component';
+import { ArticlesService } from 'shared/services';
+import { MockArticlesService } from 'shared/mocks';
 
 describe('ContentTabPanelComponent', () => {
   let component: ContentTabPanelComponent;
@@ -14,7 +16,8 @@ describe('ContentTabPanelComponent', () => {
       imports: [
         RouterTestingModule,
         MdTabsModule
-      ]
+      ],
+      providers: [ { provide: ArticlesService, useClass: MockArticlesService } ]
     })
     .compileComponents();
   }));

@@ -1,7 +1,9 @@
 import {
-  ArticlesService
+  ArticlesService,
+  TabsGuard
 } from '../shared/services';
 
 export default [
-  ArticlesService
+  ArticlesService,
+  TabsGuard
 ];
